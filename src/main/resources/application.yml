@@ -1,23 +1,23 @@
 # 配置端口
 server:
-  port: 8764
+  port: 8765
 spring:
   # 配置数据源
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/my_shiro?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    url: jdbc:mysql://39.105.20.240:3306/athena?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
   # Redis数据源
   redis:
-#    host: localhost
-#    port: 6379
+    host: 39.105.20.240
+    port: 6379
     timeout: 6000
     password:
-    cluster:
-      nodes: 39.105.20.240:6379,39.105.20.240:6380,39.105.20.240:6381
-      max-redirects: 3
+#    cluster:
+#      nodes: 39.105.20.240:6379,39.105.20.240:6380,39.105.20.240:6381
+#      max-redirects: 3
     lettuce:
       pool:
         max-active: 32  # 连接池最大连接数（使用负值表示没有限制）
