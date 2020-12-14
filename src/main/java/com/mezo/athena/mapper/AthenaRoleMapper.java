@@ -14,4 +14,6 @@ public interface AthenaRoleMapper {
     int updateByPrimaryKeySelective(AthenaRole record);
 
     int updateByPrimaryKey(AthenaRole record);
+
+    AthenaRole selectByRoleId(String roleId);
 }

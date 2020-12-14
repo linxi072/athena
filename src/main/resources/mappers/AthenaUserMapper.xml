@@ -12,23 +12,24 @@
     <result column="user_cert_num" jdbcType="VARCHAR" property="userCertNum" />
     <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
     <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_level" jdbcType="VARCHAR" property="userLevel" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="user_status" jdbcType="VARCHAR" property="userStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
   </resultMap>
   <sql id="Base_Column_List">
     id, user_id, pass_word, user_name, user_sex, user_age, user_cert_type, user_cert_num, 
-    user_phone, user_email
+    user_phone, user_email, user_level, user_type, user_status, create_time, create_user, 
+    update_time, update_user
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from athena_system_user
     where id = #{id,jdbcType=INTEGER}
-  </select>
-
-  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from athena_system_user
-    where user_name = #{userName, jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from athena_system_user
@@ -38,11 +39,15 @@
     insert into athena_system_user (id, user_id, pass_word, 
       user_name, user_sex, user_age, 
       user_cert_type, user_cert_num, user_phone, 
-      user_email)
+      user_email, user_level, user_type, 
+      user_status, create_time, create_user, 
+      update_time, update_user)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, 
       #{userName,jdbcType=VARCHAR}, #{userSex,jdbcType=TINYINT}, #{userAge,jdbcType=INTEGER}, 
       #{userCertType,jdbcType=TINYINT}, #{userCertNum,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
-      #{userEmail,jdbcType=VARCHAR})
+      #{userEmail,jdbcType=VARCHAR}, #{userLevel,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, 
+      #{userStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mezo.athena.demain.AthenaUser">
     insert into athena_system_user
@@ -77,6 +82,27 @@
       <if test="userEmail != null">
         user_email,
       </if>
+      <if test="userLevel != null">
+        user_level,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="userStatus != null">
+        user_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -108,6 +134,27 @@
       </if>
       <if test="userEmail != null">
         #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null">
+        #{userLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -141,6 +188,27 @@
       <if test="userEmail != null">
         user_email = #{userEmail,jdbcType=VARCHAR},
       </if>
+      <if test="userLevel != null">
+        user_level = #{userLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -154,7 +222,61 @@
       user_cert_type = #{userCertType,jdbcType=TINYINT},
       user_cert_num = #{userCertNum,jdbcType=VARCHAR},
       user_phone = #{userPhone,jdbcType=VARCHAR},
-      user_email = #{userEmail,jdbcType=VARCHAR}
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_level = #{userLevel,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      user_status = #{userStatus,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from athena_system_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="queryByCase" parameterType="com.mezo.athena.demain.vo.UserVO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from athena_system_user
+    <where>
+      <if test="userId != null">
+        and user_id = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="userName != null">
+        and user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="userSex != null">
+        and user_sex = #{userSex,jdbcType=TINYINT}
+      </if>
+      <if test="userAge != null">
+        and user_age = #{userAge,jdbcType=INTEGER}
+      </if>
+      <if test="userCertType != null">
+        and user_cert_type = #{userCertType,jdbcType=TINYINT}
+      </if>
+      <if test="userCertNum != null">
+        anduser_cert_num = #{userCertNum,jdbcType=VARCHAR}
+      </if>
+      <if test="userPhone != null">
+        and user_phone = #{userPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="userEmail != null">
+        and user_email = #{userEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="userLevel != null">
+        and user_level = #{userLevel,jdbcType=VARCHAR}
+      </if>
+      <if test="userType != null">
+        and user_type = #{userType,jdbcType=VARCHAR}
+      </if>
+      <if test="userStatus != null">
+        and user_status = #{userStatus,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by user_id desc
+  </select>
 </mapper>

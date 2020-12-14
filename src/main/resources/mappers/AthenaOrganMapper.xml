@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mezo.athena.mapper.AthenaOrganMapper">
+  <resultMap id="BaseResultMap" type="com.mezo.athena.demain.AthenaOrgan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="organ_id" jdbcType="VARCHAR" property="organId" />
+    <result column="organ_name" jdbcType="VARCHAR" property="organName" />
+    <result column="organ_level" jdbcType="TINYINT" property="organLevel" />
+    <result column="organ_address" jdbcType="VARCHAR" property="organAddress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, organ_id, organ_name, organ_level, organ_address
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from athena_system_organ
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from athena_system_organ
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mezo.athena.demain.AthenaOrgan">
+    insert into athena_system_organ (id, organ_id, organ_name, 
+      organ_level, organ_address)
+    values (#{id,jdbcType=INTEGER}, #{organId,jdbcType=VARCHAR}, #{organName,jdbcType=VARCHAR}, 
+      #{organLevel,jdbcType=TINYINT}, #{organAddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mezo.athena.demain.AthenaOrgan">
+    insert into athena_system_organ
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="organId != null">
+        organ_id,
+      </if>
+      <if test="organName != null">
+        organ_name,
+      </if>
+      <if test="organLevel != null">
+        organ_level,
+      </if>
+      <if test="organAddress != null">
+        organ_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="organId != null">
+        #{organId,jdbcType=VARCHAR},
+      </if>
+      <if test="organName != null">
+        #{organName,jdbcType=VARCHAR},
+      </if>
+      <if test="organLevel != null">
+        #{organLevel,jdbcType=TINYINT},
+      </if>
+      <if test="organAddress != null">
+        #{organAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mezo.athena.demain.AthenaOrgan">
+    update athena_system_organ
+    <set>
+      <if test="organId != null">
+        organ_id = #{organId,jdbcType=VARCHAR},
+      </if>
+      <if test="organName != null">
+        organ_name = #{organName,jdbcType=VARCHAR},
+      </if>
+      <if test="organLevel != null">
+        organ_level = #{organLevel,jdbcType=TINYINT},
+      </if>
+      <if test="organAddress != null">
+        organ_address = #{organAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mezo.athena.demain.AthenaOrgan">
+    update athena_system_organ
+    set organ_id = #{organId,jdbcType=VARCHAR},
+      organ_name = #{organName,jdbcType=VARCHAR},
+      organ_level = #{organLevel,jdbcType=TINYINT},
+      organ_address = #{organAddress,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

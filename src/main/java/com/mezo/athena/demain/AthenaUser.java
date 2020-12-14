@@ -1,7 +1,8 @@
 package com.mezo.athena.demain;
 
-public class AthenaUser {
+import java.util.Date;
 
+public class AthenaUser {
     private Integer id;
 
     private String userId;
@@ -10,17 +11,31 @@ public class AthenaUser {
 
     private String userName;
 
-    private Byte userSex;
+    private Integer userSex;
 
     private Integer userAge;
 
-    private Byte userCertType;
+    private Integer userCertType;
 
     private String userCertNum;
 
     private String userPhone;
 
     private String userEmail;
+
+    private String userLevel;
+
+    private String userType;
+
+    private String userStatus;
+
+    private Date createTime;
+
+    private String createUser;
+
+    private Date updateTime;
+
+    private String updateUser;
 
     public Integer getId() {
         return id;
@@ -54,11 +69,11 @@ public class AthenaUser {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public Byte getUserSex() {
+    public Integer getUserSex() {
         return userSex;
     }
 
-    public void setUserSex(Byte userSex) {
+    public void setUserSex(Integer userSex) {
         this.userSex = userSex;
     }
 
@@ -70,11 +85,11 @@ public class AthenaUser {
         this.userAge = userAge;
     }
 
-    public Byte getUserCertType() {
+    public Integer getUserCertType() {
         return userCertType;
     }
 
-    public void setUserCertType(Byte userCertType) {
+    public void setUserCertType(Integer userCertType) {
         this.userCertType = userCertType;
     }
 
@@ -100,5 +115,61 @@ public class AthenaUser {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail == null ? null : userEmail.trim();
+    }
+
+    public String getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(String userLevel) {
+        this.userLevel = userLevel == null ? null : userLevel.trim();
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType == null ? null : userType.trim();
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus == null ? null : userStatus.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser == null ? null : createUser.trim();
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser == null ? null : updateUser.trim();
     }
 }

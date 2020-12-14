@@ -2,16 +2,18 @@ package com.mezo.athena.demain;
 
 import java.util.Date;
 
-public class AthenaRole {
+public class AthenaMenu {
     private Integer id;
 
-    private String roleId;
+    private String menuId;
 
-    private String roleName;
+    private String menuUpId;
 
-    private String roleType;
+    private String menuName;
 
-    private String roleStatus;
+    private String menuLevel;
+
+    private String menuUrl;
 
     private Date createTime;
 
@@ -29,36 +31,44 @@ public class AthenaRole {
         this.id = id;
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getMenuId() {
+        return menuId;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
+    public void setMenuId(String menuId) {
+        this.menuId = menuId == null ? null : menuId.trim();
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getMenuUpId() {
+        return menuUpId;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName == null ? null : roleName.trim();
+    public void setMenuUpId(String menuUpId) {
+        this.menuUpId = menuUpId == null ? null : menuUpId.trim();
     }
 
-    public String getRoleType() {
-        return roleType;
+    public String getMenuName() {
+        return menuName;
     }
 
-    public void setRoleType(String roleType) {
-        this.roleType = roleType == null ? null : roleType.trim();
+    public void setMenuName(String menuName) {
+        this.menuName = menuName == null ? null : menuName.trim();
     }
 
-    public String getRoleStatus() {
-        return roleStatus;
+    public String getMenuLevel() {
+        return menuLevel;
     }
 
-    public void setRoleStatus(String roleStatus) {
-        this.roleStatus = roleStatus == null ? null : roleStatus.trim();
+    public void setMenuLevel(String menuLevel) {
+        this.menuLevel = menuLevel == null ? null : menuLevel.trim();
+    }
+
+    public String getMenuUrl() {
+        return menuUrl;
+    }
+
+    public void setMenuUrl(String menuUrl) {
+        this.menuUrl = menuUrl == null ? null : menuUrl.trim();
     }
 
     public Date getCreateTime() {

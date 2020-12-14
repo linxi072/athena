@@ -1,6 +1,7 @@
 package com.mezo.athena.controller;
 
 import com.mezo.athena.demain.AthenaUser;
+import com.mezo.athena.demain.vo.LoginVO;
 import com.mezo.athena.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/toLogin")
-    public AthenaUser login(AthenaUser user) {
+    public AthenaUser login(LoginVO user) {
         AthenaUser login = loginService.login(user);
         return login;
     }
