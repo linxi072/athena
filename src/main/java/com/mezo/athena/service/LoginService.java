@@ -1,10 +1,10 @@
 package com.mezo.athena.service;
 
-import com.mezo.athena.demain.UserVO;
+import com.mezo.athena.demain.AthenaUser;
 
 /**
  * 登陆类
  */
 public interface LoginService {
-    UserVO login(UserVO userVO);
+    AthenaUser login(AthenaUser userVO);
 }

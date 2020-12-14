@@ -1,11 +1,11 @@
 package com.mezo.athena.service;
 
-import com.mezo.athena.demain.User;
+import com.mezo.athena.demain.AthenaUser;
 
 /**
  * 用户类
  */
 public interface UserService {
 
-    User queryOneByAccount(String account);
+    AthenaUser queryOneByAccount(String account);
 }
