@@ -1,5 +1,6 @@
 package com.mezo.athena.service.impl;
 
+import com.mezo.athena.common.exception.IllegalDataException;
 import com.mezo.athena.demain.AthenaUser;
 import com.mezo.athena.demain.AthenaUserRole;
 import com.mezo.athena.demain.vo.LoginVO;
@@ -24,10 +25,10 @@ public class LoginServiceImpl implements LoginService {
     public AthenaUser login(LoginVO loginVO) {
         AthenaUser user = userService.queryOneByUserId(loginVO.getUserId());
         if (user == null) {
-            throw new IllegalArgumentException("用户不存在!");
+            throw new IllegalDataException("用户不存在!");
         }
         if (loginVO.getPassWord().equals(user.getPassWord())) {
-            throw new IllegalArgumentException("密码错误!");
+            throw new IllegalDataException("密码错误!");
         }
         AthenaUserRole userRole = roleService.selectRoleByUserId(user.getUserId());
         return user;

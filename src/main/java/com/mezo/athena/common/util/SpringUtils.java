@@ -12,4 +12,16 @@ public final class SpringUtils {
         }
         return "null".equals(str);
     }
+
+    public static boolean equals(String str1,String str2) {
+        if (isBack(str1)||isBack(str2)) {
+            return false;
+        } else {
+            if (str1.equals(str2)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
