@@ -3,56 +3,147 @@ package com.mezo.athena.common.config;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import freemarker.template.TemplateException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * @author qzrs
+ */
 @Configuration
 @ComponentScan(basePackages = { "com.mezo.athena" })
 @EnableWebMvc
-public class WebMvcConfig implements WebMvcConfigurer {
-//    配置模板解析器
-    @Bean
-    public FileTemplateResolver templateResolver() {
-        FileTemplateResolver templateResolver =new FileTemplateResolver();
-        templateResolver.setPrefix("/WEB－INF/views／");
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode("HTML5");
-        templateResolver.setCacheable(false);
-        return templateResolver;
+public class WebMvcConfig extends WebMvcConfigurationSupport {
+
+    /**
+     * 配置拦截器
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        super.addInterceptors(registry);
+        registry.addInterceptor(new HandlerInterceptorAdapter() {
+            @Override
+            public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+                return super.preHandle(request, response, handler);
+            }
+        }).addPathPatterns("");
+
+    }
+    /**
+     * 配置格式化器
+     */
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        super.addFormatters(registry);
+    }
+    /**
+     * 配置跨域路径映射
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        super.addCorsMappings(registry);
+        registry.addMapping("/**").allowedOrigins("*").allowedMethods("PUT,POST,GET,DELETE").allowedHeaders("*");
+    }
+    /**
+     * 静态资源处理器配置
+     * @param registry
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        super.addResourceHandlers(registry);
+        //addResourceHandler 项目路径  addResourceLocations 本地路径
+        registry.addResourceHandler("/resources/freemarker/**").addResourceLocations ("classpath:/resources/");
+        registry.addResourceHandler("/resources/mappers/**").addResourceLocations ("classpath:/resources/");
     }
 
-//    配置模板引擎
-    @Bean
-    public SpringTemplateEngine templateEngine() {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver());
-        return templateEngine;
+    /**
+     * 消息转换器
+     * @param converters
+     */
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        FastJsonHttpMessageConverter fjc = new FastJsonHttpMessageConverter();
+        FastJsonConfig fj = new FastJsonConfig();
+        fj.setSerializerFeatures(SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteMapNullValue,
+                SerializerFeature.WriteNullStringAsEmpty);
+        fjc.setFastJsonConfig(fj);
+        converters.add(fjc);
     }
 
-//    配置视图解析器
+    /**
+     * 视图解析器
+     * @param registry
+     */
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        super.configureViewResolvers(registry);
+
+    }
+    /**
+     * FreeMarker 视图解析器配置
+     * @return
+     */
     @Bean
-    public ThymeleafViewResolver viewResolver() {
-        ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
-        thymeleafViewResolver.setTemplateEngine(templateEngine());
-        thymeleafViewResolver.setCharacterEncoding("UTF-8");
-        return thymeleafViewResolver;
+    public FreeMarkerViewResolver templateResolver() {
+        FreeMarkerViewResolver viewResolver =new FreeMarkerViewResolver();
+        viewResolver.setPrefix("");
+        viewResolver.setSuffix(".ftl");
+        viewResolver.setCache(false);
+        viewResolver.setContentType("text/html;chareset=UTF-8");
+        viewResolver.setRequestContextAttribute("requestContext");
+        viewResolver.setOrder(0);
+        viewResolver.setExposeRequestAttributes(true);
+        viewResolver.setExposeSessionAttributes(true);
+        return viewResolver;
     }
 
-//    消息源配置
+    @Bean
+    public FreeMarkerConfigurer freemarkerConfig() {
+        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+        configurer.setDefaultEncoding("UTF-8");
+        configurer.setTemplateLoaderPath("classpath:/templates");
+        try {
+            freemarker.template.Configuration configuration = configurer.createConfiguration();
+            configuration.setDefaultEncoding("UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("rootContextPath",System.getProperty("root.context.path"));
+        configurer.setFreemarkerVariables(map);
+        return configurer;
+    }
+
+
+    /**
+     * 消息源配置
+     * @return
+     */
     @Bean(name = "messageSource")
     public MessageSource configureMessageSource () {
         ReloadableResourceBundleMessageSource messageSource =new ReloadableResourceBundleMessageSource();
@@ -62,41 +153,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
-//    静态资源处理器配置
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations ("/resources/");
-    }
-
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        FastJsonHttpMessageConverter fjc = new FastJsonHttpMessageConverter();
-        FastJsonConfig fj = new FastJsonConfig();
-        fj.setSerializerFeatures(SerializerFeature.DisableCircularReferenceDetect);
-        fjc.setFastJsonConfig(fj);
-        fjc.setSupportedMediaTypes(getSupportedMediaTypes());
-        converters.add(fjc);
-    }
-
-    private List<MediaType> getSupportedMediaTypes() {
-        List<MediaType> supportedMediaTypes = new ArrayList<>();
-        supportedMediaTypes.add(MediaType.APPLICATION_JSON);
-        supportedMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
-        supportedMediaTypes.add(MediaType.APPLICATION_ATOM_XML);
-        supportedMediaTypes.add(MediaType.APPLICATION_FORM_URLENCODED);
-        supportedMediaTypes.add(MediaType.APPLICATION_OCTET_STREAM);
-        supportedMediaTypes.add(MediaType.APPLICATION_PDF);
-        supportedMediaTypes.add(MediaType.APPLICATION_RSS_XML);
-        supportedMediaTypes.add(MediaType.APPLICATION_XHTML_XML);
-        supportedMediaTypes.add(MediaType.APPLICATION_XML);
-        supportedMediaTypes.add(MediaType.IMAGE_GIF);
-        supportedMediaTypes.add(MediaType.IMAGE_JPEG);
-        supportedMediaTypes.add(MediaType.IMAGE_PNG);
-        supportedMediaTypes.add(MediaType.TEXT_EVENT_STREAM);
-        supportedMediaTypes.add(MediaType.TEXT_HTML);
-        supportedMediaTypes.add(MediaType.TEXT_MARKDOWN);
-        supportedMediaTypes.add(MediaType.TEXT_PLAIN);
-        supportedMediaTypes.add(MediaType.TEXT_XML);
-        return supportedMediaTypes;
-    }
 }
