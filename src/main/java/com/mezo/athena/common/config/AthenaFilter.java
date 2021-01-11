@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * @author qzrs
  */
-@WebFilter(urlPatterns = "AthenaServlet")
+@WebFilter
 public class AthenaFilter implements Filter {
 
     @Override

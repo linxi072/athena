@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface UserService {
 
-    AthenaUser queryOneByUserId(String userId);
+    AthenaUser queryOneByUsername(String userId);
 
     List<AthenaUser> queryByCase(UserVO userVO);
 }

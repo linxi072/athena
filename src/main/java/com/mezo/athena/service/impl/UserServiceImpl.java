@@ -14,11 +14,8 @@ public class UserServiceImpl implements UserService {
     @Autowired(required = false)
     private AthenaUserMapper athenaUserMapper;
     @Override
-    public AthenaUser queryOneByUserId(String userId) {
+    public AthenaUser queryOneByUsername(String userId) {
         AthenaUser athenaUser = athenaUserMapper.selectByUserId(userId);
-        if (athenaUser!=null && athenaUser.getUserStatus().equals("2")) {
-            throw new IllegalArgumentException("用户已停用");
-        }
         return athenaUser;
     }
 

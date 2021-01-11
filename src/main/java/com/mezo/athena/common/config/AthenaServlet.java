@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * @author qzrs
  */
-@WebServlet(urlPatterns = "/AthenaServlet")
+@WebServlet
 public class AthenaServlet extends HttpServlet {
 
     @Override
@@ -22,10 +22,5 @@ public class AthenaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req,resp);
-        String cookieStr = "";
-        for (Cookie cookie : req.getCookies()) {
-            cookieStr += cookie.getName() + "=" + cookie.getValue()+";";
-        }
-        System.out.println(cookieStr);
     }
 }
