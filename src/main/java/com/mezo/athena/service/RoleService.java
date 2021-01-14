@@ -9,5 +9,6 @@ import com.mezo.athena.demain.AthenaUserRole;
 public interface RoleService {
 
     AthenaUserRole selectRoleByUserId(String userId);
+
     AthenaRole selectRoleById(String roleId);
 }

@@ -5,18 +5,21 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+/**
+ * @author qzrs
+ */
 public class AnnotationAccess {
 
     public static void printClassAnnotations(Class clazz) {
-         if (clazz.isAnnotationPresent(AuthorAnnotion.class)) {
-             AuthorAnnotion ConstructorAnnotation = (AuthorAnnotion) clazz.getAnnotation(AuthorAnnotion.class);
-             System.out.println("作者：" + ConstructorAnnotation.name() + ",公司：" + ConstructorAnnotation.company());
-         }
+        if (clazz.isAnnotationPresent(AuthorAnnotion.class)) {
+            AuthorAnnotion ConstructorAnnotation = (AuthorAnnotion) clazz.getAnnotation(AuthorAnnotion.class);
+            System.out.println("作者：" + ConstructorAnnotation.name() + ",公司：" + ConstructorAnnotation.company());
+        }
     }
 
     public static void printConstructorAnnotations(Class clazz) {
         Constructor[] declaredConstructors = clazz.getDeclaredConstructors();
-        for (int i=0;i<declaredConstructors.length;i++) {
+        for (int i = 0; i < declaredConstructors.length; i++) {
             Constructor constructor = declaredConstructors[i];
             if (constructor.isAnnotationPresent(ConstructorAnnotation.class)) {
                 ConstructorAnnotation annotation = (ConstructorAnnotation) constructor.getAnnotation(ConstructorAnnotation.class);
@@ -30,7 +33,7 @@ public class AnnotationAccess {
 
     public static void printFieldAnnotations(Class clazz) {
         Field[] declaredFields = clazz.getDeclaredFields();
-        for (int i=0;i<declaredFields.length;i++) {
+        for (int i = 0; i < declaredFields.length; i++) {
             Field field = declaredFields[i];
             if (field.isAnnotationPresent(CommonAnnotation.class)) {
                 CommonAnnotation annotation = field.getAnnotation(CommonAnnotation.class);
@@ -41,7 +44,7 @@ public class AnnotationAccess {
 
     public static void printMethodAnnotations(Class clazz) {
         Method[] declaredMethods = clazz.getDeclaredMethods();
-        for (int i=0;i<declaredMethods.length;i++) {
+        for (int i = 0; i < declaredMethods.length; i++) {
             Method method = declaredMethods[i];
             if (method.isAnnotationPresent(CommonAnnotation.class)) {
                 CommonAnnotation annotation = method.getAnnotation(CommonAnnotation.class);
@@ -51,15 +54,16 @@ public class AnnotationAccess {
             printParameterAnnotations(parameterAnnotations);
         }
     }
+
     private static void printParameterAnnotations(Annotation[][] parameterAnnotations) {
-        for (int i=0;i<parameterAnnotations.length;i++) {
+        for (int i = 0; i < parameterAnnotations.length; i++) {
             int length = parameterAnnotations[i].length;
-            if (length==0) {
-                System.out.println("");
+            if (length == 0) {
+                System.out.println();
             } else {
-                for (int j=0;j<length;j++) {
+                for (int j = 0; j < length; j++) {
                     CommonAnnotation annotation = (CommonAnnotation) parameterAnnotations[i][j];
-                    System.out.println("第"+i+1+"个参数:" + annotation.description() + ",类型:" + annotation.type());
+                    System.out.println("第" + i + 1 + "个参数:" + annotation.description() + ",类型:" + annotation.type());
                 }
             }
         }

@@ -19,14 +19,14 @@ public class AthenaExceptionHandler {
 
     @ExceptionHandler(value = IllegalDataException.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest request, Exception e) {
-        logger.error("AthenaExceptionHandler====>{}",e.getMessage());
+        logger.error("AthenaExceptionHandler====>{}", e.getMessage());
         e.printStackTrace();
         String shortName = ClassUtils.getShortName(e.getClass());
-        logger.error("AthenaExceptionHandler====>{}",shortName);
+        logger.error("AthenaExceptionHandler====>{}", shortName);
         ModelAndView view = new ModelAndView();
-        view.addObject("stackTrace",e.getStackTrace());
-        view.addObject("errorMessage",e.getMessage());
-        view.addObject("url",request.getRequestURI());
+        view.addObject("stackTrace", e.getStackTrace());
+        view.addObject("errorMessage", e.getMessage());
+        view.addObject("url", request.getRequestURI());
         view.setViewName("forward:/error/500");
         return view;
     }

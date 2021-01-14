@@ -13,6 +13,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired(required = false)
     private AthenaUserMapper athenaUserMapper;
+
     @Override
     public AthenaUser queryOneByUsername(String userId) {
         AthenaUser athenaUser = athenaUserMapper.selectByUserId(userId);

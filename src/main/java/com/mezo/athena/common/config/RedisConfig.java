@@ -12,8 +12,10 @@ public class RedisConfig {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
     /**
      * 解决redis插入中文乱码
+     *
      * @return
      */
     @Bean

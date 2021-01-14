@@ -1,9 +1,7 @@
 package com.mezo.athena.service.impl;
 
-import com.mezo.athena.common.config.CommonContext;
 import com.mezo.athena.common.exception.IllegalDataException;
 import com.mezo.athena.demain.AthenaUser;
-import com.mezo.athena.demain.AthenaUserRole;
 import com.mezo.athena.demain.vo.LoginVO;
 import com.mezo.athena.service.LoginService;
 import com.mezo.athena.service.MenuService;
@@ -13,13 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author qzrs

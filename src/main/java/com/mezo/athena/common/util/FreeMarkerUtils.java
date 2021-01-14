@@ -24,7 +24,7 @@ public class FreeMarkerUtils {
      * @param name 文件名
      * @param map  数据
      * @return 绑定数据的字符串
-     * @throws IOException  文件异常
+     * @throws IOException       文件异常
      * @throws TemplateException 模版异常
      */
     public static String binding(String path, String name, HashMap map) throws IOException, TemplateException {
@@ -47,8 +47,8 @@ public class FreeMarkerUtils {
     /**
      * xml转json
      *
-     * @param element  xml节点
-     * @param json 转化后json对象
+     * @param element xml节点
+     * @param json    转化后json对象
      */
     public static void dom4j2Json(Element element, JSONObject json) {
         //如果是属性

@@ -19,6 +19,7 @@ public class MagicController {
 
     @Autowired(required = false)
     private MagicService magicService;
+
     @GetMapping("/get")
     public String magic() {
         List<AthenaUser> list = new ArrayList<>();

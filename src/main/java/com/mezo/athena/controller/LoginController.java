@@ -1,11 +1,13 @@
 package com.mezo.athena.controller;
 
-import com.mezo.athena.common.config.CommonContext;
+import com.mezo.athena.common.constant.CommonContext;
 import com.mezo.athena.demain.AthenaUser;
 import com.mezo.athena.demain.vo.LoginVO;
 import com.mezo.athena.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +21,7 @@ public class LoginController {
 
     /**
      * 登陆
+     *
      * @param user
      * @return
      */
@@ -30,6 +33,7 @@ public class LoginController {
 
     /**
      * 注册
+     *
      * @param user
      * @return
      */
@@ -40,6 +44,7 @@ public class LoginController {
 
     /**
      * 注销
+     *
      * @param session
      */
     @PostMapping("/logout")

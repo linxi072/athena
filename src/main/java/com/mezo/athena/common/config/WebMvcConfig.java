@@ -27,12 +27,13 @@ import java.util.Map;
  * @author qzrs
  */
 @Configuration
-@ComponentScan(basePackages = { "com.mezo.athena" })
+@ComponentScan(basePackages = {"com.mezo.athena"})
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     /**
      * 配置拦截器
+     *
      * @param registry
      */
     @Override
@@ -46,6 +47,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         }).addPathPatterns("");
 
     }
+
     /**
      * 配置格式化器
      */
@@ -53,6 +55,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     public void addFormatters(FormatterRegistry registry) {
         super.addFormatters(registry);
     }
+
     /**
      * 配置跨域路径映射
      */
@@ -61,20 +64,23 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         super.addCorsMappings(registry);
         registry.addMapping("/**").allowedOrigins("*").allowedMethods("PUT,POST,GET,DELETE").allowedHeaders("*");
     }
+
     /**
      * 静态资源处理器配置
+     *
      * @param registry
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         super.addResourceHandlers(registry);
         //addResourceHandler 项目路径  addResourceLocations 本地路径
-        registry.addResourceHandler("/resources/freemarker/**").addResourceLocations ("classpath:/resources/");
-        registry.addResourceHandler("/resources/mappers/**").addResourceLocations ("classpath:/resources/");
+        registry.addResourceHandler("/resources/freemarker/**").addResourceLocations("classpath:/resources/");
+        registry.addResourceHandler("/resources/mappers/**").addResourceLocations("classpath:/resources/");
     }
 
     /**
      * 消息转换器
+     *
      * @param converters
      */
     @Override
@@ -90,6 +96,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     /**
      * 视图解析器
+     *
      * @param registry
      */
     @Override
@@ -97,13 +104,15 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         super.configureViewResolvers(registry);
 
     }
+
     /**
      * FreeMarker 视图解析器配置
+     *
      * @return
      */
     @Bean
     public FreeMarkerViewResolver templateResolver() {
-        FreeMarkerViewResolver viewResolver =new FreeMarkerViewResolver();
+        FreeMarkerViewResolver viewResolver = new FreeMarkerViewResolver();
         viewResolver.setPrefix("");
         viewResolver.setSuffix(".ftl");
         viewResolver.setCache(false);
@@ -128,8 +137,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-        Map<String,Object> map = new HashMap<>();
-        map.put("rootContextPath",System.getProperty("root.context.path"));
+        Map<String, Object> map = new HashMap<>();
+        map.put("rootContextPath", System.getProperty("root.context.path"));
         configurer.setFreemarkerVariables(map);
         return configurer;
     }
@@ -137,11 +146,12 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     /**
      * 消息源配置
+     *
      * @return
      */
     @Bean(name = "messageSource")
-    public MessageSource configureMessageSource () {
-        ReloadableResourceBundleMessageSource messageSource =new ReloadableResourceBundleMessageSource();
+    public MessageSource configureMessageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:messages");
         messageSource.setCacheSeconds(5);
         messageSource.setDefaultEncoding("UTF-8");

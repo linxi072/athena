@@ -6,12 +6,14 @@ import javax.servlet.annotation.WebListener;
 
 /**
  * 优先级 listener > filter > servlet
+ *
  * @author qzrs
  */
 @WebListener
 public class AthenaListener implements ServletContextListener {
     /**
      * 用于初始化系统参数，方法等，只在系统启动时加载一次
+     *
      * @param sce
      */
     @Override
@@ -21,6 +23,7 @@ public class AthenaListener implements ServletContextListener {
 
     /**
      * 在系统关闭时，销毁
+     *
      * @param sce
      */
     @Override

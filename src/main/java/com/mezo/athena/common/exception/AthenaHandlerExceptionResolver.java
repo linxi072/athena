@@ -28,13 +28,13 @@ public class AthenaHandlerExceptionResolver implements HandlerExceptionResolver 
         }
         String shortName = ClassUtils.getShortName(ex.getClass());
         if ("NoPermissionException".equals(shortName)) {
-            logger.error("AthenaHandlerExceptionResolver NoPermissionException===>{}",shortName);
+            logger.error("AthenaHandlerExceptionResolver NoPermissionException===>{}", shortName);
             e.printStackTrace();
             HashMap map = new HashMap();
-            map.put("stackTrace",e.getStackTrace());
-            map.put("errorMessage",e.getMessage());
-            map.put("url",request.getRequestURI());
-            return new ModelAndView("forward:/error/403",map);
+            map.put("stackTrace", e.getStackTrace());
+            map.put("errorMessage", e.getMessage());
+            map.put("url", request.getRequestURI());
+            return new ModelAndView("forward:/error/403", map);
         }
         return null;
     }

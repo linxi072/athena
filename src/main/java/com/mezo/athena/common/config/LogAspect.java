@@ -30,12 +30,12 @@ public class LogAspect {
     public void doBefore(JoinPoint joinPoint) {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
-        logger.info("请求IP:{},请求类型:{},请求地址:{}",request.getRemoteAddr(),request.getMethod(),request.getRequestURI());
-        logger.info("CLASS_METHOD:{}.{}",joinPoint.getSignature().getDeclaringTypeName(),joinPoint.getSignature().getName());
+        logger.info("请求IP:{},请求类型:{},请求地址:{}", request.getRemoteAddr(), request.getMethod(), request.getRequestURI());
+        logger.info("CLASS_METHOD:{}.{}", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
         logger.info("参数:{}", Arrays.toString(joinPoint.getArgs()));
     }
 
-    @AfterReturning(returning = "ret",pointcut = "logPointCut()")
+    @AfterReturning(returning = "ret", pointcut = "logPointCut()")
     public void doAfterReturning(Object ret) {
         logger.info("返回值:{}", JSONObject.toJSONString(ret));
     }
