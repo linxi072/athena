@@ -1,6 +1,6 @@
 package com.mezo.athena.controller;
 
-import com.mezo.athena.common.constant.CommonContext;
+import com.mezo.athena.common.constant.SystemConstant;
 import com.mezo.athena.demain.AthenaUser;
 import com.mezo.athena.demain.vo.LoginVO;
 import com.mezo.athena.service.LoginService;
@@ -49,6 +49,6 @@ public class LoginController {
      */
     @PostMapping("/logout")
     public void logout(HttpSession session) {
-        session.removeAttribute(CommonContext.CURRENT_USER_CONTEXT);
+        session.removeAttribute(SystemConstant.CURRENT_USER_CONTEXT);
     }
 }

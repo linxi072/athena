@@ -80,7 +80,7 @@ public class ApplicationTest {
             helper.setSubject("主题");
             helper.setText("<h1>这是富文本邮件内容</h1>" +
                     "<div style＝'color:red'>你好,Spring boot!我是 Kotlin。</div>",true);
-            ClassPathResource file = new ClassPathResource("freemarker/baojia.ftl");
+            ClassPathResource file = new ClassPathResource("application.yml");
             helper.addAttachment("file1",file);
             helper.addAttachment("file2",file);
             javaMailSender.send(mimeMessage);

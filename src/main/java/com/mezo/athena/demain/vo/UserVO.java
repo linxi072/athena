@@ -1,5 +1,8 @@
 package com.mezo.athena.demain.vo;
 
+/**
+ * @author qzrs
+ */
 public class UserVO {
 
     private String userId;
