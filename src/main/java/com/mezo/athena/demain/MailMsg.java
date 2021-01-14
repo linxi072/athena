@@ -37,6 +37,7 @@ public class MailMsg {
      * 文件
      */
     private List<File> files;
+
     public MailMsg() {
         FSend = false;
         html = false;

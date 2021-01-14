@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 
 /**
  * @author qzrs
@@ -21,8 +22,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private AthenaAccessDeniedHandler accessDeniedHandler;
-    @Autowired
     private LoginService userDetailsService;
 
     @Override
@@ -30,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/login/**").permitAll()
                 .anyRequest().authenticated().and().formLogin().loginPage("/login")
                 .loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password")
-                .defaultSuccessUrl("/main").and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+                .defaultSuccessUrl("/main").and().exceptionHandling().accessDeniedHandler(new AccessDeniedHandlerImpl())
                 .and().logout().logoutSuccessUrl("/login?logout");
     }
 
