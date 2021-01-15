@@ -1,4 +1,4 @@
-package com.mezo.athena.demain;
+package com.mezo.athena.common.demain;
 
 import java.io.File;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 public class MailMsg {
 
     /**
-     * 群发
+     * 是否群发
      */
     private boolean FSend;
     /**
@@ -20,6 +20,9 @@ public class MailMsg {
      * 邮件接收者
      */
     private String recipient;
+    /**
+     *
+     */
     private String[] recipientList;
     /**
      * 主题
@@ -30,7 +33,7 @@ public class MailMsg {
      */
     private String text;
     /**
-     *
+     * 是否富文本
      */
     private boolean html;
     /**

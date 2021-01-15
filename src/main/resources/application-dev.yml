@@ -9,7 +9,7 @@ spring:
   # Redis数据源
   redis:
     host: 39.105.20.240
-    port: 26379
+    port: 6379
     timeout: 6000
     password: Liu@1989
     #    cluster:

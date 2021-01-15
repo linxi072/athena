@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService {
     private AthenaUserMapper athenaUserMapper;
 
     @Override
-    public AthenaUser queryOneByUsername(String userId) {
-        AthenaUser athenaUser = athenaUserMapper.selectByUserId(userId);
+    public AthenaUser queryOneByUsername(String username) {
+        AthenaUser athenaUser = athenaUserMapper.selectByUsername(username);
         return athenaUser;
     }
 

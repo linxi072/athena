@@ -16,8 +16,15 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<nacos.version>1.0.0</nacos.version>
 	</properties>
 	<dependencies>
+		<!-- 组册中心 -->
+		<dependency>
+			<groupId>com.alibaba.nacos</groupId>
+			<artifactId>nacos-spring-context</artifactId>
+			<version>${nacos.version}</version>
+		</dependency>
 		<!-- web服务 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -99,6 +106,17 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<!--文件上传-->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
 		</dependency>
 		<!-- 调度任务框架 -->
 		<dependency>

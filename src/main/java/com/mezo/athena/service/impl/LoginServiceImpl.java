@@ -49,7 +49,6 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         userService.queryOneByUsername(username);
         return null;
     }

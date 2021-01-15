@@ -1,6 +1,6 @@
 package com.mezo.athena.common.util;
 
-import com.mezo.athena.demain.MailMsg;
+import com.mezo.athena.common.demain.MailMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

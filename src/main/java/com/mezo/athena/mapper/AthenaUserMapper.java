@@ -18,7 +18,7 @@ public interface AthenaUserMapper {
 
     AthenaUser selectByPrimaryKey(Integer id);
 
-    AthenaUser selectByUserId(String userId);
+    AthenaUser selectByUsername(String username);
 
     List<AthenaUser> queryByCase(UserVO userVO);
 }
