@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 39.105.20.240:8848
+        file-extension: yml
+        group: ${spring.application.name}
+        namespace: 20449847-5527-4a61-bdeb-dd2271aaa77d

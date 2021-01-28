@@ -1,35 +1,39 @@
 package com.mezo.athena.scheduled;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 /**
  * @author qzrs
  */
-@Component
+@EnableScheduling
 public class AsyncTask {
+
+    Logger logger = LoggerFactory.getLogger(getClass());
     @Scheduled(cron = "0/5 * * * * ?")
     public void test1() {
-        System.out.println("---------test1---------");
+        logger.info("---------test1---------");
     }
 
-    @Scheduled(cron = "1/5 * * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void test2() {
-        System.out.println("---------test2---------");
+        logger.info("---------test2---------");
     }
 
-    @Scheduled(cron = "2/5 * * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void test3() {
-        System.out.println("---------test3---------");
+        logger.info("---------test3---------");
     }
 
-    @Scheduled(cron = "3/5 * * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void test4() {
-        System.out.println("---------test4---------");
+        logger.info("---------test4---------");
     }
 
-    @Scheduled(cron = "4/5 * * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void test5() {
-        System.out.println("---------test5---------");
+        logger.info("---------test5---------");
     }
 }
