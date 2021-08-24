@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: seckill-provider-route
+        uri: lb://seckill-provider
+        predicates:
+          - Path=/seckill-provider/**
+      - id: message-provider-route
+        uri: lb://message-provider
+        predicates:
+        -Path=/message-provider/**
